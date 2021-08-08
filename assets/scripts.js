@@ -1,15 +1,22 @@
 const requestFullscreenEl = document.getElementById('request-fullscreen');
 const fullscreenEl = document.getElementById('fullscreen');
 const stylesEl = document.getElementById('dynamic');
+const introEl = document.getElementById('intro');
 const hexDisplayEl = document.getElementById('hex-display');
 
 requestFullscreenEl.addEventListener('click', ev => fullscreenEl.requestFullscreen());
 
 fullscreenEl.addEventListener('fullscreenchange', ev => {
   if (document.fullscreenElement) {
-    fullscreenEl.classList.add('active');
+    introEl.style.display = 'initial';
+    hexDisplayEl.style.display = 'none';
+    let timers = [ // cancel these
+      setTimeout(() => introEl.style.display = 'none', 3500),
+      setTimeout(() => hexDisplayEl.style.display = 'initial', 3800)
+    ];
   } else {
-    fullscreenEl.classList.remove('active');
+    introEl.style.display = 'none';
+    hexDisplayEl.style.display = 'none';
   }
 })
 
@@ -17,8 +24,8 @@ const generateHexGrid = (width, height) => {
   const stylesEl = document.createElement('style');
   stylesEl.type = 'text/css';
   stylesEl.innerHTML = `
-    #board {
-      width: calc(37px*${width});
+    #hex-display {
+      width: calc(111px*${width});
     }
   `;
   document.head.appendChild(stylesEl);
@@ -45,8 +52,8 @@ if (params.hasOwnProperty('debug')) {
   fullscreenEl.classList.add('debug');
 }
 
-const DEFAULT_HEX_GRID_WIDTH  = 19;
-const DEFAULT_HEX_GRID_HEIGHT = 8;
+const DEFAULT_HEX_GRID_WIDTH  = 14;
+const DEFAULT_HEX_GRID_HEIGHT = 5;
 const gridWidth               = params.hasOwnProperty('w') ? params.w : DEFAULT_HEX_GRID_WIDTH;
 const gridHeight              = params.hasOwnProperty('h') ? params.h : DEFAULT_HEX_GRID_HEIGHT;
 generateHexGrid(gridWidth, gridHeight);
