@@ -10,10 +10,8 @@ fullscreenEl.addEventListener('fullscreenchange', ev => {
   if (document.fullscreenElement) {
     introEl.style.display = 'initial';
     hexDisplayEl.style.display = 'none';
-    let timers = [ // cancel these
-      setTimeout(() => introEl.style.display = 'none', 3500),
-      setTimeout(() => hexDisplayEl.style.display = 'initial', 3800)
-    ];
+    setTimeout(() => {if(document.fullscreenElement){introEl.style.display = 'none'}}, 3500);
+    setTimeout(() => {if(document.fullscreenElement){hexDisplayEl.style.display = 'initial'}}, 3800);
   } else {
     introEl.style.display = 'none';
     hexDisplayEl.style.display = 'none';
