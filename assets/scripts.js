@@ -50,7 +50,7 @@ if (params.hasOwnProperty('debug')) {
   fullscreenEl.classList.add('debug');
 }
 
-const DEFAULT_HEX_GRID_WIDTH  = 14;
+const DEFAULT_HEX_GRID_WIDTH  = 13;
 const DEFAULT_HEX_GRID_HEIGHT = 5;
 const gridWidth               = params.hasOwnProperty('w') ? params.w : DEFAULT_HEX_GRID_WIDTH;
 const gridHeight              = params.hasOwnProperty('h') ? params.h : DEFAULT_HEX_GRID_HEIGHT;
